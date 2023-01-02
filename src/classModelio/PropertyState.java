@@ -1,4 +1,4 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+package classModelio;
 
 @objid ("8e6fe878-6aa8-413e-82c5-d04bc67e6e68")
 public abstract class PropertyState {

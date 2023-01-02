@@ -1,4 +1,4 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+package classModelio;
 
 @objid ("69351ffa-8076-46a9-98c4-0d766a0f2835")
 public class PublicServiceTile extends PropertyTile {

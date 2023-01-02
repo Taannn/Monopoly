@@ -1,4 +1,4 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+package classModelio;
 
 @objid ("4861a502-dfa8-460a-8e81-83f6aa948d48")
 public class TaxTile extends Tile {

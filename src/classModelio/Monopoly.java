@@ -1,8 +1,8 @@
+package classModelio;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-@objid ("27dfd1ce-eb2a-423d-ad80-6e49f0f2682d")
 public class Monopoly {
     @objid ("ba2e9cea-6859-41d1-87d4-f586a705d930")
     private int nbHouses;

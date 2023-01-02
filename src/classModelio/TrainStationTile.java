@@ -1,4 +1,4 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+package classModelio;
 
 @objid ("39855252-f75f-4055-a791-bcdd9e0e539f")
 public class TrainStationTile extends PropertyTile {

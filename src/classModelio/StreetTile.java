@@ -1,4 +1,4 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+package classModelio;
 
 @objid ("6d7b696e-d5de-4e4d-a6a1-b249d8bfeb65")
 public class StreetTile extends PropertyTile {
