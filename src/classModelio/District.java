@@ -3,23 +3,12 @@ package classModelio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class District {
+// StreetDistrict
+public interface District {
 
-    private List<PropertyTile> propertyTiles = new ArrayList<PropertyTile> ();
-
-    public void checkDistrict() {
-    }
+    void checkDistrict(Player player);
 
 
-    private boolean checkOwner(Player player) {
-    }
-
-
-    private void makeDistrictConstructible() {
-    }
-
-
-    public int getNbProperties(Player player) {
-    }
+    int getNbProperties(Player player);
 
 }

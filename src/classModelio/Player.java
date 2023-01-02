@@ -18,30 +18,42 @@ public class Player {
     private Tile tile;
 
     public void sell(Player player, PropertyTile property) {
+        // TODO
     }
 
     public void addPropertyTile(PropertyTile property) {
+        // TODO
     }
 
     public void advance(int nbTiles) {
+        // TODO
     }
 
     public void setTile(String tile) {
+        // TODO
     }
 
-    public void addPropertyCurrentTile() {
-    }
-
-    public void pay(int price) {
+    public int pay(int price) {
+        if((money-price) <= 0) {
+            setIsBankrupt(true);
+            price = money;
+            money = 0;
+        }else{
+            money -= price;
+        }
+        return price;
     }
 
     public void addMoney(int moneyToAdd) {
-    }
-
-    public void buyCurrentTile() {
+        // TODO
     }
 
     public void setIsBankrupt(boolean isBankrupt) {
+        // TODO
+    }
+
+    public int getMoney() {
+        return this.money;
     }
 
 }

@@ -1,5 +1,15 @@
 package classModelio;
 
-@objid ("1c90cbb8-592e-46c3-8b79-d8068d482c15")
 public class StateBought extends PropertyState {
+
+    public StateBought(StreetTile tile) {
+        this.streetTile = tile;
+        this.indexPrice = 0;
+
+    }
+
+    @Override
+    public void becomeConstructible() {
+        this.streetTile.setPropertyState(new StateConstructible(this.streetTile));
+    }
 }
