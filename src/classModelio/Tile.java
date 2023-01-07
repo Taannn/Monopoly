@@ -2,7 +2,9 @@ package classModelio;
 
 public abstract class Tile {
 
-    private Tile nextTile;
+    protected String name;
+
+    protected Tile nextTile;
 
     public void onStop(Player player) {
         System.out.println("Vous êtes sur une " + this.getClass().getName());
@@ -15,4 +17,7 @@ public abstract class Tile {
     public void onPass(Player player) {
     }
 
+    public String getName() {
+        return name;
+    }
 }

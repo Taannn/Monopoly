@@ -1,9 +1,14 @@
 package classModelio;
 
 public class TaxTile extends Tile {
-    private String name;
 
     private int taxPrice;
+
+    public TaxTile(String name, int taxPrice, Tile nextTile){
+        this.name = name;
+        this.nextTile = nextTile;
+        this.taxPrice = taxPrice;
+    }
 
     @Override
     public void onStop(Player player) {

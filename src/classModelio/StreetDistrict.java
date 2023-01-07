@@ -5,11 +5,22 @@ import java.util.List;
 
 public class StreetDistrict implements District {
 
+    private String color;
     private List<StreetTile> streetTiles = new ArrayList<StreetTile>();
+
+    public StreetDistrict(String color) {
+
+    }
+
+    public void addStreetTile(StreetTile tile){
+        streetTiles.add(tile);
+    }
 
     public void checkDistrict(Player player) {
         if(this.checkOwner(player)) {
             this.makeDistrictConstructible();
+        }else {
+            this.makeDistrictBought();
         }
     }
 
@@ -22,6 +33,12 @@ public class StreetDistrict implements District {
     private void makeDistrictConstructible() {
         for (StreetTile tile : this.streetTiles) {
             tile.becomeConstructible();
+        }
+    }
+
+    private void makeDistrictBought() {
+        for (StreetTile tile : this.streetTiles) {
+            tile.becomeBought();
         }
     }
 

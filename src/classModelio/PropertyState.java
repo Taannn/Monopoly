@@ -8,16 +8,23 @@ public abstract class PropertyState {
     public void buy(Player player) {
     }
 
-    public void sellProperty(Player newOwner) {
+    public void sellProperty(Player owner, Player newOwner) {
     }
 
-    public void buyHouse() {
+    public int buyHouse(Player player) {
+        return -1;
     }
 
     public void sellHouse() {
     }
 
     public void becomeConstructible() {
+    }
+
+    public void onStop(Player player) {
+    }
+
+    public void becomeBought() {
     }
 
     public void setPrice(int newPrice) {

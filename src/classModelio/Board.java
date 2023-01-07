@@ -9,4 +9,11 @@ public class Board {
 
     private List<District> districts = new ArrayList<District> ();
 
+    public StartTile getStartTile() {
+        return startTile;
+    }
+
+    public List<District> getDistricts() {
+        return districts;
+    }
 }

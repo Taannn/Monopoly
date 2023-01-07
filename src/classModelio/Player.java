@@ -11,31 +11,41 @@ public class Player {
 
     private char pawn;
 
-    private boolean isBankrupt;
+    private boolean isBankrupt = false;
 
     private List<PropertyTile> propertyTiles = new ArrayList<PropertyTile> ();
 
-    private Tile tile;
+    private Tile tile = null;
 
-    public void sell(Player player, PropertyTile property) {
-        // TODO
+    public Player( String name, char pawn) {
+        this.name = name;
+        this.pawn = pawn;
+        this.money = 1500;
+    }
+
+    public void sell(Player newOwner, PropertyTile property) {
+        int find = this.propertyTiles.indexOf(property);
+        if (find != -1) {
+            this.propertyTiles.remove(property);
+            newOwner.addPropertyTile(property);
+            property.setOwner(newOwner);
+        }
     }
 
     public void addPropertyTile(PropertyTile property) {
-        // TODO
+        this.propertyTiles.add(property);
     }
 
     public void advance(int nbTiles) {
-        // TODO
-    }
-
-    public void setTile(String tile) {
-        // TODO
+        for (int i = 0; i < nbTiles; i++) {
+            this.tile = this.tile.getNextTile();
+            tile.onPass(this);
+        }
     }
 
     public int pay(int price) {
         if((money-price) <= 0) {
-            setIsBankrupt(true);
+            setIsBankrupt();
             price = money;
             money = 0;
         }else{
@@ -44,16 +54,36 @@ public class Player {
         return price;
     }
 
-    public void addMoney(int moneyToAdd) {
-        // TODO
-    }
+    public void addMoney(int moneyToAdd) { this.money+=moneyToAdd; }
 
-    public void setIsBankrupt(boolean isBankrupt) {
-        // TODO
+    public void setIsBankrupt() {
+        for (PropertyTile propertyTile : propertyTiles) {
+            propertyTile.reset();
+        }
+        this.isBankrupt = true;
     }
 
     public int getMoney() {
         return this.money;
     }
 
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    public List<PropertyTile> getPropertyTiles() {
+        return propertyTiles;
+    }
+
+    public boolean isBankrupt() {
+        return isBankrupt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
 }
