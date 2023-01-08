@@ -1,9 +1,7 @@
-package classModelio;
+package classModelio.district;
 
-import java.util.ArrayList;
-import java.util.List;
+import classModelio.Player;
 
-// StreetDistrict
 public interface District {
 
     void checkDistrict(Player player);

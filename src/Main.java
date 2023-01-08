@@ -1,4 +1,8 @@
 import classModelio.*;
+import classModelio.district.PublicServiceDistrict;
+import classModelio.district.StreetDistrict;
+import classModelio.district.TrainStationDistrict;
+import classModelio.tile.*;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.tile;
+
+import classModelio.Player;
+import classModelio.district.District;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,13 +9,10 @@ import java.io.InputStreamReader;
 
 public abstract class PropertyTile extends Tile {
 
-    protected int buyingCost;
-
-    protected int price;
-
-    protected Player owner;
-
-    protected District district;
+    private int buyingCost;
+    private int price;
+    private Player owner;
+    private District district;
 
     public void buy(Player newOwner) {
         if(newOwner.getMoney() > this.buyingCost){
@@ -28,7 +28,7 @@ public abstract class PropertyTile extends Tile {
     @Override
     public void onStop(Player player) {
         if (owner == null){
-            System.out.println("Voulez-vous acheter " + this.name + " pour " + this.getBuyingCost() + " ? ( y / n ) ");
+            System.out.println("Voulez-vous acheter " + this.getName() + " pour " + this.getBuyingCost() + " ? ( y / n ) ");
             String response;
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -68,11 +68,18 @@ public abstract class PropertyTile extends Tile {
         price = newPrice;
     }
 
-    protected District getDistrict() {
+    public District getDistrict() {
         return this.district;
     }
 
     public int getBuyingCost() {
         return buyingCost;
+    }
+
+    public void setBuyingCost(int buyingCost) {
+        this.buyingCost = buyingCost;
+    }
+    public void setDistrict(District district) {
+        this.district = district;
     }
 }

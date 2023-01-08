@@ -1,5 +1,8 @@
 package classModelio;
 
+import classModelio.tile.PropertyTile;
+import classModelio.tile.Tile;
+
 import java.util.ArrayList;
 import java.util.List;
 

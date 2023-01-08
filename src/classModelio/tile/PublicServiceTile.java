@@ -1,14 +1,16 @@
-package classModelio;
+package classModelio.tile;
+
+import classModelio.district.PublicServiceDistrict;
 
 public class PublicServiceTile extends PropertyTile {
 
     private int multiplicator;
 
     public PublicServiceTile(String name, Tile nextTile, PublicServiceDistrict district){
-        this.name = name;
-        this.nextTile = nextTile;
-        this.buyingCost = 150;
-        this.district = district;
+        this.setName(name);
+        this.setNextTile(nextTile);
+        this.setBuyingCost(150);
+        this.setDistrict(district);
         district.addPublicServiceTile(this);
     }
 

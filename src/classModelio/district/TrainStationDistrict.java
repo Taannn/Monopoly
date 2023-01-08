@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.district;
+
+import classModelio.Player;
+import classModelio.tile.TrainStationTile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class TrainStationDistrict implements District {
     public void checkDistrict(Player player) {
         int price = listPrices[getNbProperties(player) - 1];
         for (TrainStationTile trainTile : trainTiles) {
-            if(trainTile.owner == player){
+            if(trainTile.getOwner() == player){
                 trainTile.setPrice(price);
             }
         }

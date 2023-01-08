@@ -1,5 +1,9 @@
 package classModelio;
 
+import classModelio.tile.PropertyTile;
+import classModelio.tile.StartTile;
+import classModelio.tile.StreetTile;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -78,7 +82,7 @@ public class Monopoly {
                 }
                 int dice = rollDice();
                 System.out.println(currentPlayer.getName() + " a fait " + dice + " aux dés.");
-                System.out.println(currentPlayer.getName() + " tombe sur la case " + currentPlayer.getTile().getName());
+                System.out.println(currentPlayer.getName() + " tombe sur " + currentPlayer.getTile().getName());
 
                 currentPlayer.getTile().onStop(currentPlayer);
                 System.out.println("Voici votre solde : " + currentPlayer.getMoney() + " €");
@@ -87,7 +91,6 @@ public class Monopoly {
                     loosers.add(currentPlayer);
                 }else{
                     manageProperties(currentPlayer);
-                    System.out.println("Vous avez donc " + currentPlayer.getMoney() + " €");
                 }
             }
 

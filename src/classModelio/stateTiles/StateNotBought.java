@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.stateTiles;
+
+import classModelio.Player;
+import classModelio.tile.StreetTile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +16,7 @@ public class StateNotBought extends PropertyState {
 
     @Override
     public void buy(Player player) {
-        player.pay(this.streetTile.buyingCost);
+        player.pay(this.streetTile.getBuyingCost());
         this.streetTile.setOwner(player);
         player.addPropertyTile(this.streetTile);
         this.streetTile.setPropertyState(new StateBought(this.streetTile));
@@ -22,7 +25,7 @@ public class StateNotBought extends PropertyState {
 
     @Override
     public void onStop(Player player) {
-        System.out.println("Voulez-vous acheter " + this.streetTile.name + " pour " + this.streetTile.getBuyingCost() + " € ? ( y / n ) ");
+        System.out.println("Voulez-vous acheter " + this.streetTile.getName() + " pour " + this.streetTile.getBuyingCost() + " € ? ( y / n ) ");
         String response;
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

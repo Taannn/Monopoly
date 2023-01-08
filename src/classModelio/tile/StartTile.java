@@ -1,17 +1,15 @@
-package classModelio;
+package classModelio.tile;
+
+import classModelio.Player;
 
 public class StartTile extends Tile {
 
     public StartTile() {
-        this.name = "Case Départ";
+        this.setName("Case Départ");
     }
 
     @Override
     public void onPass(Player player) {
         player.addMoney(200);
-    }
-
-    public void setNextTile(Tile nextTile) {
-        this.nextTile = nextTile;
     }
 }

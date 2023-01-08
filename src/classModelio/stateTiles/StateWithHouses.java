@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.stateTiles;
+
+import classModelio.Player;
+import classModelio.tile.StreetTile;
 
 public class StateWithHouses extends PropertyState {
 
@@ -29,9 +32,9 @@ public class StateWithHouses extends PropertyState {
 
     @Override
     public void onStop(Player player) {
-        if ( this.streetTile.owner != player){
+        if ( this.streetTile.getOwner() != player){
             int paidPrice = player.pay(this.streetTile.getPriceFromList(indexPrice));
-            this.streetTile.owner.addMoney(paidPrice);
+            this.streetTile.getOwner().addMoney(paidPrice);
         }
     }
 }

@@ -1,4 +1,10 @@
-package classModelio;
+package classModelio.tile;
+
+import classModelio.Player;
+import classModelio.stateTiles.PropertyState;
+import classModelio.stateTiles.StateNotBought;
+import classModelio.district.StreetDistrict;
+
 public class StreetTile extends PropertyTile {
     private final int constructionCost;
 
@@ -6,14 +12,14 @@ public class StreetTile extends PropertyTile {
 
     private final int[] listPrices;
 
-    protected PropertyState propertyState;
+    private PropertyState propertyState;
 
-    public StreetTile( String name, StreetDistrict district, int buyingCost, int constructionCost, Tile nextTile, int[] listPrices) {
-        this.name = name;
-        this.district = district;
-        this.buyingCost = buyingCost;
+    public StreetTile(String name, StreetDistrict district, int buyingCost, int constructionCost, Tile nextTile, int[] listPrices) {
+        this.setName(name);
+        this.setNextTile(nextTile);
+        this.setBuyingCost(buyingCost);
+        this.setDistrict(district);
         this.constructionCost = constructionCost;
-        this.nextTile = nextTile;
         this.listPrices = listPrices;
         this.propertyState = new StateNotBought(this);
 

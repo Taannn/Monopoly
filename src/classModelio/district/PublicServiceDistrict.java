@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.district;
+
+import classModelio.Player;
+import classModelio.tile.PublicServiceTile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +16,7 @@ public class PublicServiceDistrict implements District {
     public void checkDistrict(Player player) {
         int multiplicator = listMultiplicators[getNbProperties(player) - 1];
         for (PublicServiceTile publicServicesTile : publicServicesTiles) {
-            if(publicServicesTile.owner == player){
+            if(publicServicesTile.getOwner() == player){
                 publicServicesTile.setMultiplicatore(multiplicator);
             }
         }

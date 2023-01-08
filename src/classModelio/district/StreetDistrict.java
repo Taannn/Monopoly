@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.district;
+
+import classModelio.Player;
+import classModelio.tile.StreetTile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +9,7 @@ import java.util.List;
 public class StreetDistrict implements District {
 
     private String color;
-    private List<StreetTile> streetTiles = new ArrayList<StreetTile>();
+    private final List<StreetTile> streetTiles = new ArrayList<>();
 
     public StreetDistrict(String color) {
 

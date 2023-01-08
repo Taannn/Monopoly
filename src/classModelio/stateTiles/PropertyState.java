@@ -1,4 +1,7 @@
-package classModelio;
+package classModelio.stateTiles;
+
+import classModelio.Player;
+import classModelio.tile.StreetTile;
 
 public abstract class PropertyState {
     protected int indexPrice;
