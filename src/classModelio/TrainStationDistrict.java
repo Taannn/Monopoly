@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrainStationDistrict implements District {
-    private List<TrainStationTile> trainTiles = new ArrayList<>();
+    private final List<TrainStationTile> trainTiles = new ArrayList<>();
 
     private final int[] listPrices = {50,100,150,200};
 
@@ -14,7 +14,7 @@ public class TrainStationDistrict implements District {
     }
 
     public void checkDistrict(Player player) {
-        int price = listPrices[getNbProperties(player)];
+        int price = listPrices[getNbProperties(player) - 1];
         for (TrainStationTile trainTile : trainTiles) {
             if(trainTile.owner == player){
                 trainTile.setPrice(price);

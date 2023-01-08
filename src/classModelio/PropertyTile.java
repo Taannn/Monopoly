@@ -3,7 +3,6 @@ package classModelio;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
 public abstract class PropertyTile extends Tile {
 
@@ -29,7 +28,7 @@ public abstract class PropertyTile extends Tile {
     @Override
     public void onStop(Player player) {
         if (owner == null){
-            System.out.println("Voulez-vous acheter " + this.name + " pour " + this.getPrice() + " ? ( y / n ) ");
+            System.out.println("Voulez-vous acheter " + this.name + " pour " + this.getBuyingCost() + " ? ( y / n ) ");
             String response;
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -73,4 +72,7 @@ public abstract class PropertyTile extends Tile {
         return this.district;
     }
 
+    public int getBuyingCost() {
+        return buyingCost;
+    }
 }

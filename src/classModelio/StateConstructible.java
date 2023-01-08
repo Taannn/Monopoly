@@ -3,7 +3,7 @@ package classModelio;
 public class StateConstructible extends PropertyState {
     public StateConstructible(StreetTile tile) {
         this.streetTile = tile;
-        this.indexPrice = 1;
+        this.indexPrice = 0;
     }
 
     @Override
@@ -12,6 +12,8 @@ public class StateConstructible extends PropertyState {
         if(player.getMoney() >= constructionCost){
             this.streetTile.addHouse();
             player.pay(constructionCost);
+            this.streetTile.propertyState = new StateWithHouses(this.streetTile);
+            System.out.println("Vous avez acheté votre première maison sur " + this.streetTile.getName());
             return 0;
         }else {
             System.out.println(" Vous n'avez pas assez d'argent !");
@@ -21,7 +23,6 @@ public class StateConstructible extends PropertyState {
 
     @Override
     public void becomeBought() {
-        this.streetTile.setPrice(this.streetTile.getPrice() / 2);
         this.streetTile.setPropertyState(new StateBought(this.streetTile));
     }
 
@@ -38,8 +39,7 @@ public class StateConstructible extends PropertyState {
     @Override
     public void onStop(Player player) {
         if ( this.streetTile.owner != player){
-            System.out.println("Vous devez payer " + this.streetTile.getPrice());
-            int paidPrice = player.pay(this.streetTile.getPrice());
+            int paidPrice = player.pay(this.streetTile.getPriceFromList(indexPrice) * 2);
             this.streetTile.owner.addMoney(paidPrice);
         }
     }

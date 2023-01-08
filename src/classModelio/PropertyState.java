@@ -12,6 +12,7 @@ public abstract class PropertyState {
     }
 
     public int buyHouse(Player player) {
+        System.out.println("Vous ne pouvez pas acheter de maison sur ce terrain.");
         return -1;
     }
 

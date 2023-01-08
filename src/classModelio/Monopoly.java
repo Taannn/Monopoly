@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class Monopoly {
 
+    public boolean debug = false;
     private int nbHouses = 32;
 
     private int nbHotels = 12;
@@ -18,30 +18,40 @@ public class Monopoly {
 
     private Player currentPlayer;
 
-    private Board board;
-
-    public Monopoly(List<Player> players, Board board) {
+    public Monopoly(List<Player> players, StartTile startTile) {
         if(!players.isEmpty()){
-            this.board = board;
             this.players = players;
             for (Player player : players) {
-                player.setTile(board.getStartTile());
+                player.setTile(startTile);
             }
         }
-
-        startGame();
     }
 
     public int rollDice() {
-        int diceResult = new Random().nextInt(11) + 1;
-        System.out.println(currentPlayer.toString() + "a fait" + diceResult);
+
+        int diceResult = 0;
+        if(this.debug) {
+            System.out.println("De combien voulez-vous avancer ?");
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                diceResult = Integer.parseInt(br.readLine());
+            } catch (Exception e) {
+                System.out.println("Caractère invalide");
+            }
+        } else {
+            diceResult = new Random().nextInt(11) + 1;
+        }
+
         currentPlayer.advance(diceResult);
         return diceResult;
     }
 
     public void buyConstruction(StreetTile streetTile) {
         if ( streetTile.getNbHouses() == 4 && nbHotels > 0){
-            if ( streetTile.buyHouse(currentPlayer) == 1 ) nbHotels--;
+            if ( streetTile.buyHouse(currentPlayer) == 1 ) {
+                nbHotels--;
+                nbHouses += 4;
+            }
         } else if (nbHouses > 0 && streetTile.getNbHouses() < 4){
             if ( streetTile.buyHouse(currentPlayer) == 0 ) nbHouses--;
         }else {
@@ -52,57 +62,80 @@ public class Monopoly {
 
     public void startGame() {
         while (players.size() != 1) {
+            ArrayList<Player> loosers = new ArrayList<>();
             for (Player player : this.players) {
                 currentPlayer = player;
+                System.out.println("----------Tour de " + currentPlayer.getName() + "----------------");
+                System.out.println("Votre solde s'élève à " + currentPlayer.getMoney() + " €");
+                System.out.println("Lancez les dés (appuyez sur entrée)");
+
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    br.readLine();
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 int dice = rollDice();
                 System.out.println(currentPlayer.getName() + " a fait " + dice + " aux dés.");
-                System.out.println(currentPlayer.getName() + "tombe sur la case " + currentPlayer.getTile().getName());
+                System.out.println(currentPlayer.getName() + " tombe sur la case " + currentPlayer.getTile().getName());
 
                 currentPlayer.getTile().onStop(currentPlayer);
-                System.out.println("Voici votre solde : " + player.getMoney() + " €");
+                System.out.println("Voici votre solde : " + currentPlayer.getMoney() + " €");
 
-                if(player.isBankrupt()){
-                    players.remove(player);
+                if(currentPlayer.isBankrupt()){
+                    loosers.add(currentPlayer);
                 }else{
                     manageProperties(currentPlayer);
+                    System.out.println("Vous avez donc " + currentPlayer.getMoney() + " €");
                 }
-
-                System.out.println("Vous avez donc " + player.getMoney() + " €");
             }
+
+            for(Player looser : loosers) {
+                players.remove(looser);
+            }
+
         }
+
+        System.out.println(players.get(0).getName() + " a gagné ! Bravo à lui !");
     }
 
     public void manageProperties(Player player) {
         int i = 0;
+        ArrayList<StreetTile> streetTilesOfPlayer = new ArrayList<>();
+        System.out.println("Liste des propriétés de " + currentPlayer.getName() + " :");
         for (PropertyTile propertyTile : player.getPropertyTiles()) {
-            if(propertyTile.getClass().getName().equals("StreetTile")){
+            if(propertyTile instanceof StreetTile) {
+                streetTilesOfPlayer.add((StreetTile) propertyTile);
                 System.out.println(i + " : " + propertyTile.getName());
+                i++;
             }
-            i++;
         }
 
-        String answer = "0";
-        while(!answer.equals("-1")) {
+        int answer = 0;
+        while(answer != -1 && player.getPropertyTiles().size() > 0) {
             System.out.println("Souhaitez vous construire sur une de vos propriétés ? Si oui donner le numéro correspondant ou -1 pour quitter");
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                answer  = br.readLine();
-
+                answer = Integer.parseInt(br.readLine());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println("Caractère invalide");
             }
 
-            if(!Objects.equals(answer, "-1")){
-                int answerInt = Integer.parseInt(answer);
-                if(answerInt >= 0 && answerInt < player.getPropertyTiles().size()){
-                    PropertyTile propertyTile = player.getPropertyTiles().get(answerInt);
-                    this.buyConstruction((StreetTile) propertyTile);
+            if(answer != -1){
+                if(answer >= 0 && answer < streetTilesOfPlayer.size()){
+                    StreetTile propertyTile = streetTilesOfPlayer.get(answer);
+                    this.buyConstruction(propertyTile);
                 }
             }
 
             System.out.println("Il vous reste " + player.getMoney() + " €");
         }
 
+    }
+
+    public void toggleDebugMode() {
+        this.debug = !this.debug;
     }
 
 }

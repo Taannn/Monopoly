@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 
 public class StateNotBought extends PropertyState {
 
+
+    public StateNotBought(StreetTile streetTile) {
+        this.streetTile = streetTile;
+    }
+
     @Override
     public void buy(Player player) {
         player.pay(this.streetTile.buyingCost);
@@ -17,7 +22,7 @@ public class StateNotBought extends PropertyState {
 
     @Override
     public void onStop(Player player) {
-        System.out.println("Voulez-vous acheter " + this.streetTile.name + " pour " + this.streetTile.getPrice() + " ? ( y / n ) ");
+        System.out.println("Voulez-vous acheter " + this.streetTile.name + " pour " + this.streetTile.getBuyingCost() + " € ? ( y / n ) ");
         String response;
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -10,4 +10,8 @@ public class StartTile extends Tile {
     public void onPass(Player player) {
         player.addMoney(200);
     }
+
+    public void setNextTile(Tile nextTile) {
+        this.nextTile = nextTile;
+    }
 }

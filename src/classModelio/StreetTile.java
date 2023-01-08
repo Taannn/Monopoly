@@ -1,15 +1,10 @@
 package classModelio;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class StreetTile extends PropertyTile {
-    private int constructionCost;
+    private final int constructionCost;
 
     private int nbHouses = 0;
 
-    private int[] listPrices;
+    private final int[] listPrices;
 
     protected PropertyState propertyState;
 
@@ -20,7 +15,7 @@ public class StreetTile extends PropertyTile {
         this.constructionCost = constructionCost;
         this.nextTile = nextTile;
         this.listPrices = listPrices;
-        this.propertyState = new StateNotBought();
+        this.propertyState = new StateNotBought(this);
 
         district.addStreetTile(this);
     }
@@ -40,7 +35,6 @@ public class StreetTile extends PropertyTile {
     public void addHouse() {
         if(this.nbHouses < 5) {
             this.nbHouses += 1;
-            this.price = this.listPrices[this.nbHouses];
         }
     }
 
@@ -49,10 +43,6 @@ public class StreetTile extends PropertyTile {
     }
 
     public void sellProperty(Player newOwner) {
-    }
-
-    public int getListPricesByIndex(int index) {
-        return this.listPrices[index];
     }
 
     @Override
@@ -66,5 +56,9 @@ public class StreetTile extends PropertyTile {
 
     public int buyHouse(Player player) {
         return this.propertyState.buyHouse(player);
+    }
+
+    public int getPriceFromList(int index) {
+        return listPrices[index];
     }
 }

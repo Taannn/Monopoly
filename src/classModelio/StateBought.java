@@ -1,9 +1,5 @@
 package classModelio;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class StateBought extends PropertyState {
 
     public StateBought(StreetTile tile) {
@@ -12,7 +8,6 @@ public class StateBought extends PropertyState {
     }
     @Override
     public void becomeConstructible() {
-        this.streetTile.setPrice(this.streetTile.getPrice() * 2);
         this.streetTile.setPropertyState(new StateConstructible(this.streetTile));
     }
 
@@ -28,8 +23,7 @@ public class StateBought extends PropertyState {
     @Override
     public void onStop(Player player) {
         if ( this.streetTile.owner != player){
-            System.out.println("Vous devez payer " + this.streetTile.getPrice());
-            int paidPrice = player.pay(this.streetTile.getPrice());
+            int paidPrice = player.pay(this.streetTile.getPriceFromList(indexPrice));
             this.streetTile.owner.addMoney(paidPrice);
         }
     }

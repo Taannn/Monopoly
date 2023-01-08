@@ -5,15 +5,15 @@ import java.util.List;
 
 public class Player {
 
-    private String name;
+    private final String name;
 
     private int money;
 
-    private char pawn;
+    private final char pawn;
 
     private boolean isBankrupt = false;
 
-    private List<PropertyTile> propertyTiles = new ArrayList<PropertyTile> ();
+    private final List<PropertyTile> propertyTiles = new ArrayList<> ();
 
     private Tile tile = null;
 
@@ -39,7 +39,7 @@ public class Player {
     public void advance(int nbTiles) {
         for (int i = 0; i < nbTiles; i++) {
             this.tile = this.tile.getNextTile();
-            tile.onPass(this);
+            this.tile.onPass(this);
         }
     }
 
@@ -51,16 +51,21 @@ public class Player {
         }else{
             money -= price;
         }
+        System.out.println(this.getName() + " a payé " + price + " €");
         return price;
     }
 
-    public void addMoney(int moneyToAdd) { this.money+=moneyToAdd; }
+    public void addMoney(int moneyToAdd) {
+        this.money+=moneyToAdd;
+        System.out.println(this.getName() + " a recu " + moneyToAdd + " €");
+    }
 
     public void setIsBankrupt() {
         for (PropertyTile propertyTile : propertyTiles) {
             propertyTile.reset();
         }
         this.isBankrupt = true;
+        System.out.println(this.getName() + " est en banqueroute, il a perdu !");
     }
 
     public int getMoney() {
