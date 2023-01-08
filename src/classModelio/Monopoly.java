@@ -80,11 +80,8 @@ public class Monopoly {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                int dice = rollDice();
-                System.out.println(currentPlayer.getName() + " a fait " + dice + " aux dés.");
-                System.out.println(currentPlayer.getName() + " tombe sur " + currentPlayer.getTile().getName());
+                rollDice();
 
-                currentPlayer.getTile().onStop(currentPlayer);
                 System.out.println("Voici votre solde : " + currentPlayer.getMoney() + " €");
 
                 if(currentPlayer.isBankrupt()){

@@ -40,10 +40,15 @@ public class Player {
     }
 
     public void advance(int nbTiles) {
+        System.out.println(this.getName() + " a fait " + nbTiles + " aux dés.");
+
         for (int i = 0; i < nbTiles; i++) {
             this.tile = this.tile.getNextTile();
             this.tile.onPass(this);
         }
+        System.out.println(this.getName() + " tombe sur " + this.getTile().getName());
+
+        this.getTile().onStop(this);
     }
 
     public int pay(int price) {
