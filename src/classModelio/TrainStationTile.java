@@ -1,24 +1,17 @@
 package classModelio;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class TrainStationTile extends PropertyTile {
 
-    private int[] listPrices = new int[4];
-
-    public TrainStationTile(String name, Tile nextTile){
+    public TrainStationTile(String name, Tile nextTile, TrainStationDistrict district){
         this.name = name;
         this.nextTile = nextTile;
         this.buyingCost = 200;
-    }
-
-    public int getListPricesByIndex(int index) {
-        return listPrices[index];
-    }
-
-    public void onStop(Player player) {
-        if(player != owner) {
-            int paidPrice = player.pay(this.getPrice());
-            this.owner.addMoney(paidPrice);
-        }
+        this.district = district;
+        district.addTrainStationTile(this);
     }
 
 }
