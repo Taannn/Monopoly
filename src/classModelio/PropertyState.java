@@ -26,12 +26,4 @@ public abstract class PropertyState {
 
     public void becomeBought() {
     }
-
-    public void setPrice(int newPrice) {
-    }
-
-    public int getRentPrice() {
-        return this.streetTile.getListPricesByIndex(this.indexPrice);
-    }
-
 }
