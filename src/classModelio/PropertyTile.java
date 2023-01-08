@@ -16,6 +16,36 @@ public abstract class PropertyTile extends Tile {
     protected District district;
 
     public void buy(Player newOwner) {
+        if(newOwner.getMoney() > this.buyingCost){
+            newOwner.pay(this.buyingCost);
+            newOwner.addPropertyTile(this);
+            this.owner = newOwner;
+            district.checkDistrict(newOwner);
+        }else {
+            System.out.println("Vous n'avez pas assez d'argent.");
+        }
+    }
+
+    @Override
+    public void onStop(Player player) {
+        if (owner == null){
+            System.out.println("Voulez-vous acheter " + this.name + " pour " + this.getPrice() + " ? ( y / n ) ");
+            String response;
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                response  = br.readLine();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            if(response.equals("y") || response.equals("Y")) {
+                buy(player);
+            }
+        }else if(player != owner) {
+            int paidPrice = player.pay(this.getPrice());
+            this.owner.addMoney(paidPrice);
+        }
     }
 
     public void reset() {

@@ -14,6 +14,10 @@ public abstract class Tile {
         return null;
     }
 
+    public void setNextTile(Tile nextTile) {
+        this.nextTile = nextTile;
+    }
+
     public void onPass(Player player) {
     }
 
