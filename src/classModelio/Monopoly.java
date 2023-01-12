@@ -31,7 +31,7 @@ public class Monopoly {
         }
     }
 
-    public int rollDice() {
+    public void rollDice() {
 
         int diceResult = 0;
         if(this.debug) {
@@ -47,7 +47,6 @@ public class Monopoly {
         }
 
         currentPlayer.advance(diceResult);
-        return diceResult;
     }
 
     public void buyConstruction(StreetTile streetTile) {
@@ -101,35 +100,37 @@ public class Monopoly {
     }
 
     public void manageProperties(Player player) {
-        int i = 0;
         ArrayList<StreetTile> streetTilesOfPlayer = new ArrayList<>();
         System.out.println("Liste des propriétés de " + currentPlayer.getName() + " :");
         for (PropertyTile propertyTile : player.getPropertyTiles()) {
             if(propertyTile instanceof StreetTile) {
                 streetTilesOfPlayer.add((StreetTile) propertyTile);
-                System.out.println(i + " : " + propertyTile.getName());
-                i++;
             }
         }
 
-        int answer = 0;
-        while(answer != -1 && player.getPropertyTiles().size() > 0) {
-            System.out.println("Souhaitez vous construire sur une de vos propriétés ? Si oui donner le numéro correspondant ou -1 pour quitter");
-            try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                answer = Integer.parseInt(br.readLine());
-            } catch (IOException e) {
-                System.out.println("Caractère invalide");
+        if(streetTilesOfPlayer.size() != 0) {
+            for (int i = 0; i < streetTilesOfPlayer.size(); i++) {
+                System.out.println(i + " : " + streetTilesOfPlayer.get(i).getName());
             }
-
-            if(answer != -1){
-                if(answer >= 0 && answer < streetTilesOfPlayer.size()){
-                    StreetTile propertyTile = streetTilesOfPlayer.get(answer);
-                    this.buyConstruction(propertyTile);
+            int answer = 0;
+            while(answer != -1 && player.getPropertyTiles().size() > 0) {
+                System.out.println("Souhaitez vous construire sur une de vos propriétés ? Si oui donner le numéro correspondant ou -1 pour quitter");
+                try {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    answer = Integer.parseInt(br.readLine());
+                } catch (IOException e) {
+                    System.out.println("Caractère invalide");
                 }
-            }
 
-            System.out.println("Il vous reste " + player.getMoney() + " €");
+                if(answer != -1){
+                    if(answer >= 0 && answer < streetTilesOfPlayer.size()){
+                        StreetTile propertyTile = streetTilesOfPlayer.get(answer);
+                        this.buyConstruction(propertyTile);
+                    }
+                }
+
+                System.out.println("Il vous reste " + player.getMoney() + " €");
+            }
         }
 
     }
