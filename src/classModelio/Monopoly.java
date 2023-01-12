@@ -32,17 +32,20 @@ public class Monopoly {
     }
 
     public void rollDice() {
-
         int diceResult = 0;
+
+        System.out.println("Lancez les dés (appuyez sur entrée)");
         if(this.debug) {
-            System.out.println("De combien voulez-vous avancer ?");
-            try {
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                diceResult = Integer.parseInt(br.readLine());
-            } catch (Exception e) {
-                System.out.println("Caractère invalide");
-            }
-        } else {
+            System.out.println("Mode DEBUG, entrez votre avancement");
+        }
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            diceResult = Integer.parseInt(br.readLine());
+        } catch (Exception e) {
+            System.out.println("Caractère invalide");
+        }
+
+        if(!this.debug) {
             diceResult = new Random().nextInt(11) + 1;
         }
 
@@ -68,17 +71,9 @@ public class Monopoly {
             ArrayList<Player> loosers = new ArrayList<>();
             for (Player player : this.players) {
                 currentPlayer = player;
-                System.out.println("----------Tour de " + currentPlayer.getName() + "----------------");
+                System.out.println("\n----------Tour de " + currentPlayer.getName() + "----------------");
                 System.out.println("Votre solde s'élève à " + currentPlayer.getMoney() + " €");
-                System.out.println("Lancez les dés (appuyez sur entrée)");
 
-                try {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                    br.readLine();
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
                 rollDice();
 
                 System.out.println("Voici votre solde : " + currentPlayer.getMoney() + " €");
